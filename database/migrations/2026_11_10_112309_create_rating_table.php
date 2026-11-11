@@ -9,14 +9,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rating', function (Blueprint $table) {
-            $table->id('id_rating');
+            $table->id();
 
             $table->foreignId('detail_transaksi_id')
-                ->unique()
-                ->constrained('detail_transaksi', 'id_detail_transaksi')
+                ->constrained('detail_transaksi')
                 ->restrictOnDelete();
 
-            $table->smallInteger('nilai_rating');
+            $table->tinyInteger('nilai_rating');
 
             $table->text('deskripsi_rating')->nullable();
 

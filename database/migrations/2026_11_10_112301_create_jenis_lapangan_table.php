@@ -9,10 +9,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jenis_lapangan', function (Blueprint $table) {
-            $table->id('id_jenis_lapangan');
-
-            $table->string('nama_lapangan', 100)->unique();
-            $table->text('deskripsi')->nullable();
+            $table->id();
+            $table->string('nama_lapangan', 100);
         });
     }
 

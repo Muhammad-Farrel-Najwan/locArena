@@ -9,15 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reply_data', function (Blueprint $table) {
-            $table->id('id_reply');
+            $table->id();
 
             $table->foreignId('ticket_id')
-                ->constrained('ticket', 'id_ticket')
+                ->constrained('ticket')
                 ->cascadeOnDelete();
-
-            $table->foreignId('user_id')
-                ->constrained('users', 'id_user')
-                ->restrictOnDelete();
 
             $table->text('deskripsi_reply');
 

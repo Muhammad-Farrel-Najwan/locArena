@@ -9,20 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ticket', function (Blueprint $table) {
-            $table->id('id_ticket');
+            $table->id();
 
             $table->foreignId('user_id')
-                ->constrained('users', 'id_user')
+                ->constrained('users')
                 ->restrictOnDelete();
-
             $table->text('deskripsi_laporan');
-
-            $table->string('jenis_laporan', 50)->nullable();
-
+            $table->string('jenis_laporan', 50);
             $table->string('status', 20)->default('open');
-
             $table->timestampsTz();
-
             $table->index(['user_id', 'status']);
         });
     }

@@ -9,21 +9,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaksi', function (Blueprint $table) {
-            $table->id('id_transaksi');
+            $table->id();
 
             $table->foreignId('customer_id')
-                ->constrained('users', 'id_user')
+                ->constrained('users' )
                 ->restrictOnDelete();
 
             $table->foreignId('pemilik_id')
-                ->constrained('profil_pemilik', 'id_profil_pemilik')
+                ->constrained('pemilik_lapangan')
                 ->restrictOnDelete();
 
             $table->decimal('total_harga', 12, 2);
 
             $table->string('metode_pembayaran', 20);
-
-            $table->decimal('persentase_dp', 5, 2)->default(50);
 
             $table->string('status_transaksi', 30)
                 ->default('menunggu_pembayaran');

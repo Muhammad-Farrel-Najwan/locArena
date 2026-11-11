@@ -9,14 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_transaksi', function (Blueprint $table) {
-            $table->id('id_detail_transaksi');
+            $table->id();
 
             $table->foreignId('transaksi_id')
-                ->constrained('transaksi', 'id_transaksi')
+                ->constrained('transaksi')
                 ->cascadeOnDelete();
 
             $table->foreignId('lapangan_id')
-                ->constrained('lapangan', 'id_lapangan')
+                ->constrained('lapangan')
                 ->restrictOnDelete();
 
             $table->timestampTz('waktu_mulai');
@@ -34,11 +34,8 @@ return new class extends Migration
 
             $table->index([
                 'lapangan_id',
-                'waktu_mulai',
-                'waktu_selesai'
+                'status_booking'
             ]);
-
-            $table->index('status_booking');
         });
     }
 

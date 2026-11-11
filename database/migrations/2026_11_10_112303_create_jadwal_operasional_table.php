@@ -9,18 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('jadwal_operasional', function (Blueprint $table) {
-            $table->id('id_jadwal');
-
-            $table->foreignId('venue_id')
-                ->constrained('venue', 'id_venue')
-                ->cascadeOnDelete();
-
-            $table->smallInteger('hari');
-
+            $table->id();
+            $table->tinyInteger('hari');
             $table->time('jam_buka');
             $table->time('jam_tutup');
 
-            $table->boolean('is_buka')->default(true);
+            $table->foreignId('venue_id')
+                ->constrained('venue')
+                ->cascadeOnDelete();
 
             $table->unique(['venue_id', 'hari']);
         });

@@ -9,12 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kecamatan', function (Blueprint $table) {
-            $table->id('id_kecamatan');
-
+            $table->id();
             $table->string('nama_kecamatan', 100);
-
             $table->foreignId('kota_id')
-                ->constrained('kota', 'id_kota')
+                ->constrained('kota')
                 ->restrictOnDelete();
 
             $table->unique(['kota_id', 'nama_kecamatan']);

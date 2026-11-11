@@ -9,10 +9,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payment_webhook', function (Blueprint $table) {
-            $table->id('id_webhook');
+            $table->id();
 
             $table->foreignId('pembayaran_id')
-                ->constrained('pembayaran', 'id_pembayaran')
+                ->constrained('pembayaran')
                 ->restrictOnDelete();
 
             $table->jsonb('payload');
@@ -26,8 +26,6 @@ return new class extends Migration
 
             $table->timestampTz('received_at')->useCurrent();
             $table->timestampTz('processed_at')->nullable();
-
-            $table->index('processing_status');
         });
     }
 

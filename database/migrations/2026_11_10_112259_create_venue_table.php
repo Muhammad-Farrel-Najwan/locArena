@@ -9,14 +9,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('venue', function (Blueprint $table) {
-            $table->id('id_venue');
+            $table->id();
 
             $table->foreignId('pemilik_id')
-                ->constrained('profil_pemilik', 'id_profil_pemilik')
+                ->constrained('pemilik_lapangan')
                 ->restrictOnDelete();
 
             $table->foreignId('kecamatan_id')
-                ->constrained('kecamatan', 'id_kecamatan')
+                ->constrained('kecamatan')
                 ->restrictOnDelete();
 
             $table->string('nama_venue', 100);

@@ -8,9 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Tabel pengguna locArena
         Schema::create('users', function (Blueprint $table) {
-            $table->id('id_user');
+            $table->id();
 
             $table->string('nama_depan', 50);
             $table->string('nama_belakang', 50)->nullable();
@@ -25,37 +24,12 @@ return new class extends Migration
 
             $table->string('role', 20);
 
-            $table->rememberToken();
             $table->timestampsTz();
-
-            $table->index('role');
-        });
-
-        // Tabel reset password Laravel
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
-        });
-
-        // Tabel session pengguna
-        Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
-
-            $table->foreignId('user_id')->nullable()->index();
-
-            $table->string('ip_address', 45)->nullable();
-            $table->text('user_agent')->nullable();
-
-            $table->longText('payload');
-            $table->integer('last_activity')->index();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('sessions');
-        Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('users');
     }
 };

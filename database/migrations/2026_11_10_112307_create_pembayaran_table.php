@@ -9,15 +9,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pembayaran', function (Blueprint $table) {
-            $table->id('id_pembayaran');
+            $table->id();
 
             $table->foreignId('transaksi_id')
-                ->constrained('transaksi', 'id_transaksi')
+                ->constrained('transaksi')
                 ->restrictOnDelete();
 
             $table->string('jenis_pembayaran', 20);
-
-            $table->string('provider', 30)->default('midtrans');
 
             $table->string('external_order_id', 100)->unique();
 
@@ -31,7 +29,6 @@ return new class extends Migration
 
             $table->text('snap_token')->nullable();
             $table->text('payment_url')->nullable();
-
             $table->string('provider_status', 50)->nullable();
 
             $table->timestampTz('expires_at')->nullable();
