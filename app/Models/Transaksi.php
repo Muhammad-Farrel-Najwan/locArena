@@ -2,51 +2,38 @@
 
 namespace App\Models;
 
+use App\Models\pembayaran;
+use App\Models\users;
+use App\Models\pemilik_lapangan;
+use App\Models\detail_transaksi;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class transaksi extends Model
 {
     protected $table = 'transaksi';
-
-    protected $primaryKey = 'id_transaksi';
-
     protected $fillable = [
-        'customer_id',
+        'user_id',
         'pemilik_id',
         'total_harga',
         'metode_pembayaran',
-        'persentase_dp',
         'status_transaksi',
         'batas_pembayaran',
-        'batas_pelunasan',
+        'batas_pelunasan'
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'total_harga' => 'decimal:2',
-            'persentase_dp' => 'decimal:2',
-            'batas_pembayaran' => 'datetime',
-            'batas_pelunasan' => 'datetime',
-        ];
-    }
-    public function customer()
-    {
-        return $this->belongsTo(User::class, 'customer_id', 'id_user');
+    public function pemilik_lapangan() {
+        return $this->belongsTo(pemilik_lapangan::class,'pemilik_id');
     }
 
-    public function pemilik()
-    {
-        return $this->belongsTo(ProfilPemilik::class, 'pemilik_id', 'id_profil_pemilik');
+    public function detail_transaksi() {
+        return $this->hasMany(detail_transaksi::class, 'transaksi_id');
     }
 
-    public function detailTransaksi()
-    {
-        return $this->hasMany(DetailTransaksi::class, 'transaksi_id', 'id_transaksi');
+    public function pembayaran() {
+        return $this->hasMany(pembayaran::class,'transaksi_id');
     }
 
-    public function pembayaran()
-    {
-        return $this->hasMany(Pembayaran::class, 'transaksi_id', 'id_transaksi');
+    public function users() {
+        return $this->belongsTo(users::class, 'user_id');
     }
 }

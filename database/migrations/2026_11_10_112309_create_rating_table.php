@@ -11,9 +11,20 @@ return new class extends Migration
         Schema::create('rating', function (Blueprint $table) {
             $table->id();
 
+
             $table->foreignId('detail_transaksi_id')
                 ->constrained('detail_transaksi')
-                ->restrictOnDelete();
+                ->cascadeOnDelete();
+
+            $table->unique('detail_transaksi_id');
+
+            $table->foreignId('lapangan_id')
+            ->constrained('lapangan')
+            ->cascadeOnDelete();
+
+            $table->foreignId('user_id')
+            ->constrained('users')
+            ->cascadeOnDelete();
 
             $table->tinyInteger('nilai_rating');
 

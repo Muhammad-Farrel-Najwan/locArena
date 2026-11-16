@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\transaksi;
+use App\Models\payment_webhook;
 use Illuminate\Database\Eloquent\Model;
 
-class Pembayaran extends Model
+class pembayaran extends Model
 {
     protected $table = 'pembayaran';
-
-    protected $primaryKey = 'id_pembayaran';
-
     protected $fillable = [
         'transaksi_id',
         'jenis_pembayaran',
-        'provider',
         'external_order_id',
         'provider_transaction_id',
         'nominal_pembayaran',
@@ -25,21 +23,11 @@ class Pembayaran extends Model
         'paid_at',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'nominal_pembayaran' => 'decimal:2',
-            'expires_at' => 'datetime',
-            'paid_at' => 'datetime',
-        ];
-    }
-    public function transaksi()
-    {
-        return $this->belongsTo(Transaksi::class, 'transaksi_id', 'id_transaksi');
+    public function transaksi() {
+        return $this->belongsTo(transaksi::class, 'transaksi_id');
     }
 
-    public function webhooks()
-    {
-        return $this->hasMany(PaymentWebhook::class, 'pembayaran_id', 'id_pembayaran');
+    public function payment_webhook() {
+        return $this->hasMany(payment_webhook::class, 'pembayaran_id');
     }
 }

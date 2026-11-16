@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('latitude', 10, 7)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();
 
-            $table->string('status_verifikasi', 20)->default('pending');
+            $table->boolean('status_verifikasi')->default(0);
             $table->text('alasan_penolakan')->nullable();
 
             $table->timestampsTz();

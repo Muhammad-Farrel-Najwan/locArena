@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
+use App\Models\kecamatan;
+use App\Models\lapangan;
+use App\Models\jadwal_operasional;
+use App\Models\pemilik_lapangan;
 use Illuminate\Database\Eloquent\Model;
 
-class Venue extends Model
+class venue extends Model
 {
     protected $table = 'venue';
-
-    protected $primaryKey = 'id_venue';
-
     protected $fillable = [
         'pemilik_id',
         'kecamatan_id',
@@ -18,30 +19,22 @@ class Venue extends Model
         'latitude',
         'longitude',
         'status_verifikasi',
-        'alasan_penolakan',
+        'alasan_penolakan'
     ];
-    public function pemilik()
-    {
-        return $this->belongsTo(ProfilPemilik::class, 'pemilik_id', 'id_profil_pemilik');
+
+    public function kecamatan() {
+        return $this->belongsTo(kecamatan::class, 'kecamatan_id');
     }
 
-    public function kecamatan()
-    {
-        return $this->belongsTo(Kecamatan::class, 'kecamatan_id', 'id_kecamatan');
+    public function lapangan() {
+        return $this->hasMany(lapangan::class, 'venue_id');
     }
 
-    public function riwayatVerifikasi()
-    {
-        return $this->hasMany(RiwayatVerifikasiVenue::class, 'venue_id', 'id_venue');
+    public function jadwal_operasional() {
+        return $this->hasMany(jadwal_operasional::class, 'venue_id');
     }
 
-    public function lapangan()
-    {
-        return $this->hasMany(Lapangan::class, 'venue_id', 'id_venue');
-    }
-
-    public function jadwalOperasional()
-    {
-        return $this->hasMany(JadwalOperasional::class, 'venue_id', 'id_venue');
+    public function pemilik_lapangan() {
+        return $this->belongsTo(pemilik_lapangan::class, 'pemilik_id');
     }
 }
