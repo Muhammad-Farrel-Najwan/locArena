@@ -12,6 +12,6 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index() {
-        $getLapangan = detail_transaksi::with('lapangan')->selectRaw('lapangan_id, count(*) as jumlahMuncul')->groupBy('lapangan_id')->orderBy('jumlahMuncul', 'desc')->limit(15)->get();
+        $getLapangan = detail_transaksi::with('lapangan')->selectRaw('lapangan_id, count(*) as jumlah_muncul')->groupBy('lapangan_id')->orderBy('jumlah_muncul', 'desc')->limit(15)->get();
     }
 }
