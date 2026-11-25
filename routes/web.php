@@ -35,17 +35,11 @@ use App\Http\Controllers\Customer\RatingController;
 use App\Http\Controllers\Payment\MidtransWebhookController;
 
 // PUBLIC
-Route::get('/', [HomeController::class, 'index'])
+Route::get('/', [HomeController::class, 'landing'])
     ->name('home');
 
-// AUTHENTICATION
+// AUTHENTICATION (form login belum tersedia)
 Route::middleware('guest')->group(function () {
-
-    Route::get('/login', [AuthController::class, 'showLogin'])
-        ->name('login');
-
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('login.process');
 
     Route::get('/register', [AuthController::class, 'showRegister'])
         ->name('register');

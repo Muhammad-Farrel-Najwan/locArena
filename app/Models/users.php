@@ -4,9 +4,9 @@ namespace App\Models;
 
 use App\Models\rating;
 use App\Models\transaksi;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class users extends Model
+class users extends Authenticatable
 {
     protected $table = 'users';
     protected $fillable = [
