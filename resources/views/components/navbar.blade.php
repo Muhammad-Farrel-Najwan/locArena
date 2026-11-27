@@ -8,8 +8,13 @@
                 <a href="/" class="font-primary font-bold text-2xl">LocArena</a>
             </div>
             <div class="flex flex-row items-center gap-2">
-                <button class="h-full bg-green-50 px-8 rounded-xl border font-bold">Sign In</button>
-                <button class="h-full bg-green-500 px-8 rounded-xl border font-bold">Log In</button>
+
+                <a href="{{ route('register') }}" class="h-full bg-green-50 px-8 rounded-xl border font-bold inline-flex items-center justify-center text-center">Register</a>
+                <a href="{{ route('login') }}" class="h-full bg-green-500 px-8 rounded-xl border font-bold inline-flex items-center justify-center text-center">Log In</a>
+
+
+                {{-- <button class="h-full bg-green-50 px-8 rounded-xl border font-bold">Sign In</button> --}}
+                {{-- <button class="h-full bg-green-500 px-8 rounded-xl border font-bold">Log In</button> --}}
             </div>
         </div>
     </div>
